@@ -1,0 +1,14 @@
+[package]
+name = "email-verifier"
+version = "1.0.0"
+edition = "2021"
+description = "Verify email addresses in real time. Check deliverability and clean your lists. Powered by Enrow."
+license = "MIT"
+keywords = ["email-verifier", "email", "b2b", "enrow"]
+repository = "https://github.com/enrow/email-verifier-rust"
+
+[dependencies]
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
