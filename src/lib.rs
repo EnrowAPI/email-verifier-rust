@@ -1,6 +1,5 @@
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 const BASE_URL: &str = "https://api.enrow.io";
 
@@ -15,18 +14,14 @@ pub struct Settings {
 #[derive(Debug, Clone)]
 pub struct VerifyEmailParams {
     pub email: String,
+    pub custom: Option<String>,
     pub webhook: Option<String>,
 }
 
 #[derive(Debug, Clone)]
-pub struct BulkVerification {
-    pub email: String,
-    pub custom: Option<HashMap<String, serde_json::Value>>,
-}
-
-#[derive(Debug, Clone)]
 pub struct VerifyEmailsParams {
-    pub verifications: Vec<BulkVerification>,
+    pub emails: Vec<String>,
+    pub custom: Option<String>,
     pub webhook: Option<String>,
 }
 
@@ -38,6 +33,7 @@ pub struct VerificationResult {
     pub id: String,
     pub email: Option<String>,
     pub qualification: Option<String>,
+    pub custom: Option<String>,
     pub status: Option<String>,
     pub message: Option<String>,
     pub credits_used: Option<u32>,
@@ -123,6 +119,10 @@ pub async fn verify_email(
     let mut body = serde_json::Map::new();
     body.insert("email".into(), serde_json::Value::String(params.email.clone()));
 
+    if let Some(ref custom) = params.custom {
+        body.insert("custom".into(), serde_json::Value::String(custom.clone()));
+    }
+
     if let Some(settings) = build_settings(&params.webhook) {
         body.insert("settings".into(), serde_json::to_value(settings)?);
     }
@@ -163,23 +163,18 @@ pub async fn verify_emails(
 ) -> Result<BulkVerificationResult, Box<dyn std::error::Error>> {
     let client = build_client(api_key)?;
 
-    let verifications: Vec<serde_json::Value> = params
-        .verifications
+    let emails: Vec<serde_json::Value> = params
+        .emails
         .iter()
-        .map(|v| {
-            let mut entry = serde_json::Map::new();
-            entry.insert("email".into(), serde_json::Value::String(v.email.clone()));
-
-            if let Some(ref custom) = v.custom {
-                entry.insert("custom".into(), serde_json::to_value(custom).unwrap());
-            }
-
-            serde_json::Value::Object(entry)
-        })
+        .map(|e| serde_json::Value::String(e.clone()))
         .collect();
 
     let mut body = serde_json::Map::new();
-    body.insert("verifications".into(), serde_json::Value::Array(verifications));
+    body.insert("emails".into(), serde_json::Value::Array(emails));
+
+    if let Some(ref custom) = params.custom {
+        body.insert("custom".into(), serde_json::Value::String(custom.clone()));
+    }
 
     if let Some(settings) = build_settings(&params.webhook) {
         body.insert("settings".into(), serde_json::to_value(settings)?);
