@@ -100,7 +100,7 @@ Paid plans start at **$17/mo** for 1,000 credits up to **$497/mo** for 100,000 c
 ## Documentation
 
 - [Enrow API documentation](https://docs.enrow.io)
-- [Full Enrow SDK](https://github.com/EnrowAPI/enrow-rust) -- includes email finder, phone finder, reverse email lookup, and more
+- [Full Enrow SDK](https://github.com/EnrowAPI/enrow-rust) -- includes email finder, phone finderand more
 
 ## License
 
