@@ -2,6 +2,8 @@
 
 [![crates.io](https://img.shields.io/crates/v/email-verifier.svg)](https://crates.io/crates/email-verifier)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/EnrowAPI/email-verifier-rust)](https://github.com/EnrowAPI/email-verifier-rust)
+[![Last commit](https://img.shields.io/github/last-commit/EnrowAPI/email-verifier-rust)](https://github.com/EnrowAPI/email-verifier-rust/commits)
 
 Verify email addresses in real time. Check deliverability, detect disposable and catch-all domains, and clean your email lists before sending.
 
@@ -98,7 +100,7 @@ Paid plans start at **$17/mo** for 1,000 credits up to **$497/mo** for 100,000 c
 ## Documentation
 
 - [Enrow API documentation](https://docs.enrow.io)
-- [Full Enrow SDK](https://github.com/enrow/enrow-rust) -- includes email finder, phone finder, reverse email lookup, and more
+- [Full Enrow SDK](https://github.com/EnrowAPI/enrow-rust) -- includes email finder, phone finder, reverse email lookup, and more
 
 ## License
 

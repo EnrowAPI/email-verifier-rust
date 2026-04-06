@@ -5,7 +5,7 @@ edition = "2021"
 description = "Verify email addresses in real time. Check deliverability and clean your lists. Powered by Enrow."
 license = "MIT"
 keywords = ["email-verifier", "email", "b2b", "enrow"]
-repository = "https://github.com/enrow/email-verifier-rust"
+repository = "https://github.com/EnrowAPI/email-verifier-rust"
 
 [dependencies]
 reqwest = { version = "0.12", features = ["json"] }
